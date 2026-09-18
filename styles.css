@@ -109,3 +109,12 @@
 
 .photo[data-label="Casamento"]{background-image:linear-gradient(0deg,rgba(0,0,0,.2),transparent 58%),url('/assets/weddings/aj-934.webp');background-size:cover;background-position:center 42%}
 .photo[data-label="Casamento"]:after{display:none}
+
+.service-media{position:relative;display:block;min-height:450px;overflow:hidden;color:#fff}
+.service-media .photo{position:absolute;inset:0;min-height:0;height:100%;transition:transform .55s ease}
+.service-media .photo:after{display:none}
+.service-media:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.58),transparent 45%);pointer-events:none}
+.service-media-label{position:absolute;z-index:2;left:clamp(20px,3vw,42px);bottom:clamp(20px,3vw,36px);padding:10px 0;border-bottom:1px solid currentColor;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+.service-media:hover .photo{transform:scale(1.025)}
+.service-media:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+@media(max-width:800px){.service-media{min-height:58svh}.service-media .photo{min-height:0}.service-media-label{font-size:.82rem}}
