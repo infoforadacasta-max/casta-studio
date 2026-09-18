@@ -3,7 +3,7 @@ const photo=(label,extra='')=>`<div class="photo ${extra}" data-label="${label}"
 const clientGallery='https://clientes.castastudio.pt';
 const christmasBooking='https://castafotografia.pixieset.com/booking';
 const nav=()=>`<div class="nav-reveal-zone" aria-hidden="true"></div><header class="nav"><a class="brand brand-logo" href="/historias" aria-label="CASTA Histórias"><img src="/assets/casta-logo-black.png" alt="CASTA"></a><nav class="links" id="links"><a href="/historias/casamentos">Casamentos</a><div class="nav-group"><div class="nav-parent"><a href="/historias/maternidade">Maternidade</a><button class="submenu-toggle" aria-expanded="false" aria-label="Mostrar opções de Maternidade">⌄</button></div><div class="dropdown"><a href="/historias/maternidade/gravidez">Gravidez</a><a href="/historias/maternidade/newborn">Newborn</a><a href="/historias/maternidade/acompanhamento">Acompanhamento</a><a href="/historias/maternidade/aniversarios">Aniversários</a></div></div><div class="nav-group"><div class="nav-parent"><a href="/historias/familias">Famílias & Retratos</a><button class="submenu-toggle" aria-expanded="false" aria-label="Mostrar opções de Famílias e Retratos">⌄</button></div><div class="dropdown"><a href="/historias/familias/familia">Família</a><a href="/historias/familias/casal">Casal</a><a href="/historias/familias/retrato-individual">Retrato individual</a></div></div><a href="/historias/batizados">Batizados</a><a href="${christmasBooking}" target="_blank" rel="noopener noreferrer">Natal · Reservar ↗</a><a href="${clientGallery}" target="_blank" rel="noopener noreferrer">Clientes ↗</a><a href="/historias/sobre">Sobre</a><a href="/historias/contacto">Contacto</a></nav><button class="menu" aria-expanded="false" aria-controls="links" aria-label="Abrir menu">MENU</button></header>`;
-const footer=()=>`<footer class="footer"><div><h3>CASTA Studio</h3><div>Fotografia & Filme<br>Alenquer, Portugal</div></div><div><span class="eyebrow">Contacto</span><p><a href="/historias/contacto">Falar connosco</a><br><a href="https://wa.me/351919592819" target="_blank" rel="noopener noreferrer">WhatsApp Histórias</a><br><a href="https://www.instagram.com/castafotografia/" target="_blank" rel="noopener noreferrer">Instagram Histórias</a></p></div><div><span class="eyebrow">Acesso rápido</span><p><a href="${clientGallery}" target="_blank" rel="noopener noreferrer">Galerias de Clientes ↗</a><br><a href="/comercial">CASTA Comercial →</a></p></div></footer>`;
+const footer=()=>`<footer class="footer"><div><h3>CASTA Studio</h3><div>Base em Alenquer<br>Sessões na região e arredores</div></div><div><span class="eyebrow">Contacto</span><p><a href="/historias/contacto">Falar connosco</a><br><a href="https://wa.me/351919592819" target="_blank" rel="noopener noreferrer">WhatsApp Histórias</a><br><a href="https://www.instagram.com/castafotografia/" target="_blank" rel="noopener noreferrer">Instagram Histórias</a></p></div><div><span class="eyebrow">Acesso rápido</span><p><a href="${clientGallery}" target="_blank" rel="noopener noreferrer">Galerias de Clientes ↗</a><br><a href="/comercial">CASTA Comercial →</a></p></div></footer>`;
 const commercialFooter=()=>`<footer class="footer dark"><div><h3>CASTA Studio</h3><div>Fotografia & Vídeo<br>Alenquer, Portugal</div></div><div><span class="eyebrow">Contacto Comercial</span><p><a href="/comercial/contacto">Falar connosco</a><br><a href="https://wa.me/351913415383" target="_blank" rel="noopener noreferrer">WhatsApp Comercial</a><br><a href="https://www.instagram.com/casta.pro/" target="_blank" rel="noopener noreferrer">Instagram Comercial</a></p></div><div><span class="eyebrow">Outro universo</span><p><a href="/historias">CASTA Histórias →</a></p></div></footer>`;
 const cta=(title,button,href)=>`<section class="cta"><h2>${title}</h2><p>Contem-nos o que estão a planear e verificamos disponibilidade.</p><a class="btn" href="${href}">${button}</a></section>`;
 const gallery=(labels=['Casamento','Família','Newborn','Batizado','Momentos'])=>`<div class="gallery">${labels.map(x=>photo(x)).join('')}</div>`;
@@ -36,7 +36,10 @@ document.getElementById('app').innerHTML=pages[path]||historias;
 
 // Enrich the service pages with practical information, prices and real client feedback.
 const main=document.querySelector('main');
-if(path==='/historias') document.querySelector('.about')?.insertAdjacentHTML('beforebegin',testimonials([...weddingReviews.slice(0,1),...familyReviews.slice(0,2)]));
+if(path==='/historias'){
+  document.querySelector('.hero .eyebrow').textContent='Fotografia & Filme · Alenquer e região';
+  document.querySelector('.about')?.insertAdjacentHTML('beforebegin',`<section class="section service-area"><span class="eyebrow">Área de serviço</span><h2>Estamos em Alenquer. Vamos mais longe.</h2><p class="lead">Trabalhamos regularmente em Alenquer, Torres Vedras, Sobral de Monte Agraço, Arruda dos Vinhos, Vila Franca de Xira, Azambuja, Cadaval e noutras localidades num raio aproximado de 40 km.</p></section>${testimonials([...weddingReviews.slice(0,1),...familyReviews.slice(0,2)])}`);
+}
 if(path==='/historias/casamentos'){
   document.querySelector('.gallery')?.insertAdjacentHTML('afterend',prices([['Fotografia','1.100 €','Reportagem completa e sessão de namoro.'],['Fotografia + vídeo','2.200 €','Uma equipa, duas formas de contar o dia.']]));
   document.querySelector('.faq')?.insertAdjacentHTML('beforebegin',testimonials(weddingReviews));
@@ -73,6 +76,7 @@ if(form&&path==='/historias/contacto'){
   form.querySelector('button').textContent='Enviar pelo WhatsApp';
   form.querySelector('.success')?.remove();
   form.insertAdjacentHTML('beforeend','<p class="form-note full">Ao continuar, o WhatsApp abre com estes dados numa mensagem. Só será enviada quando confirmares.</p>');
+  document.querySelector('.contact>div p:last-child').textContent='Base em Alenquer · sessões na região e num raio aproximado de 40 km';
 }
 const requestedService=new URLSearchParams(location.search).get('servico');
 if(requestedService&&form?.querySelector('#type')){
@@ -106,14 +110,14 @@ form?.addEventListener('submit',e=>{
 document.querySelectorAll('.links a').forEach(a=>{if(new URL(a.href,location.origin).pathname.replace(/\/$/,'')===path)a.setAttribute('aria-current','page')});
 document.querySelectorAll('.nav-group').forEach(group=>{const parent=group.querySelector('.nav-parent>a');const parentPath=new URL(parent.href,location.origin).pathname.replace(/\/$/,'');if(path.startsWith(parentPath+'/'))parent.setAttribute('aria-current','page')});
 const meta={
-  '/historias':['Fotografia de Casamentos, Maternidade e Famílias em Alenquer | CASTA','Fotografia e filme de casamentos, maternidade, famílias, retratos e batizados em Alenquer.'],
-  '/historias/casamentos':['Fotógrafos de Casamento em Alenquer | CASTA','Reportagem de casamento natural em fotografia e vídeo. Coleções desde 1.100 €.'],
-  '/historias/maternidade':['Fotografia de Gravidez, Newborn e Aniversário | CASTA','Sessões de gravidez, newborn, acompanhamento e aniversários em Alenquer. Valores desde 110 €.'],
+  '/historias':['Fotografia de Casamentos, Maternidade e Famílias | CASTA','Fotografia e filme com base em Alenquer, para clientes da região Oeste, Grande Lisboa e localidades próximas.'],
+  '/historias/casamentos':['Fotógrafos de Casamento | Alenquer e Região | CASTA','Reportagem de casamento natural em fotografia e vídeo, com base em Alenquer e deslocação para toda a região.'],
+  '/historias/maternidade':['Fotografia de Gravidez, Newborn e Aniversário | CASTA','Sessões de maternidade com base em Alenquer, para famílias da região e localidades próximas. Valores desde 110 €.'],
   '/historias/maternidade/gravidez':['Sessão Fotográfica de Gravidez em Alenquer | CASTA','Sessões de gravidez em estúdio ou exterior, idealmente entre as 28 e as 34 semanas.'],
   '/historias/maternidade/newborn':['Sessão Fotográfica Newborn em Alenquer | CASTA','Fotografia de recém-nascido em estúdio ou em casa, ao ritmo do bebé.'],
   '/historias/maternidade/acompanhamento':['Acompanhamento Fotográfico do Bebé | CASTA','Sessões para guardar o crescimento do bebé durante o primeiro ano e além.'],
   '/historias/maternidade/aniversarios':['Sessões Fotográficas de Aniversário | CASTA','Sessões de aniversário para crianças de 1, 2, 3, 4 anos ou mais em Alenquer.'],
-  '/historias/familias':['Fotografia de Família, Casal e Retrato em Alenquer | CASTA','Sessões naturais de família, casal e retrato individual em Alenquer.'],
+  '/historias/familias':['Fotografia de Família, Casal e Retrato | CASTA','Sessões naturais de família, casal e retrato individual em Alenquer, região Oeste e localidades próximas.'],
   '/historias/familias/familia':['Sessão Fotográfica de Família em Alenquer | CASTA','Sessões naturais de família em estúdio, no exterior ou num lugar especial.'],
   '/historias/familias/casal':['Sessão Fotográfica de Casal em Alenquer | CASTA','Sessões de casal descontraídas, naturais e sem poses forçadas.'],
   '/historias/familias/retrato-individual':['Retrato Individual em Alenquer | CASTA','Sessões de retrato individual em estúdio ou exterior, com orientação e naturalidade.'],
@@ -124,6 +128,12 @@ const meta={
   '/comercial/contacto':['Contactar | CASTA Comercial','Fala-nos do teu projeto de fotografia, vídeo ou conteúdo para marcas.']
 };
 if(meta[path]){document.title=meta[path][0];document.querySelector('meta[name="description"]')?.setAttribute('content',meta[path][1])}
+if(path.startsWith('/historias')){
+  const serviceArea=document.createElement('script');
+  serviceArea.type='application/ld+json';
+  serviceArea.textContent=JSON.stringify({'@context':'https://schema.org','@type':'ProfessionalService','@id':'https://www.castastudio.pt/#casta-fotografia','name':'CASTA Fotografia','url':'https://www.castastudio.pt/historias/','telephone':'+351919592819','address':{'@type':'PostalAddress','addressLocality':'Alenquer','addressCountry':'PT'},'areaServed':['Alenquer','Torres Vedras','Sobral de Monte Agraço','Arruda dos Vinhos','Vila Franca de Xira','Azambuja','Cadaval','Região Oeste','Grande Lisboa']});
+  document.head.appendChild(serviceArea);
+}
 const siteNav=document.querySelector('.nav');
 if(siteNav){
   let lastScroll=window.scrollY;
