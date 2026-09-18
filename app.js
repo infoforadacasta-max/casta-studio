@@ -80,8 +80,8 @@ form?.addEventListener('submit',e=>{
 // Active navigation state and page-specific search metadata.
 document.querySelectorAll('.links a').forEach(a=>{if(new URL(a.href,location.origin).pathname.replace(/\/$/,'')===path)a.setAttribute('aria-current','page')});
 const meta={
-  '/historias':['Fotografia de Casamentos e Famílias em Alenquer | CASTA','Fotografia e filme de casamentos, maternidade, famílias e batizados em Alenquer, Oeste e Lisboa.'],
-  '/historias/casamentos':['Fotógrafos de Casamento em Alenquer e Lisboa | CASTA','Reportagem de casamento natural em fotografia e vídeo. Coleções desde 1.100 €.'],
+  '/historias':['Fotografia de Casamentos e Famílias em Alenquer | CASTA','Fotografia e filme de casamentos, maternidade, famílias e batizados em Alenquer.'],
+  '/historias/casamentos':['Fotógrafos de Casamento em Alenquer | CASTA','Reportagem de casamento natural em fotografia e vídeo. Coleções desde 1.100 €.'],
   '/historias/maternidade':['Fotografia de Gravidez, Newborn e Família | CASTA','Sessões de gravidez, recém-nascido, bebés e famílias em Alenquer. Valores desde 110 €.'],
   '/historias/batizados':['Fotografia e Vídeo de Batizados em Alenquer | CASTA','Cobertura de batizados em fotografia e vídeo, desde a cerimónia ao dia completo.'],
   '/historias/contacto':['Marcar Sessão | CASTA Histórias','Pede disponibilidade e informações para a tua sessão através do WhatsApp.'],
