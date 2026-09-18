@@ -50,11 +50,22 @@
 .hero h1{line-height:1}
 .photo[data-label="Maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%),url('/assets/maternidade-casal.jpg');background-position:center 62%}
 .photo[data-label="Maternidade"]:after{display:none}
+.nav-group{position:relative}
+.nav-parent{display:flex;align-items:center;gap:5px}
+.submenu-toggle{border:0;background:transparent;color:inherit;padding:2px 3px;font:inherit;cursor:pointer;line-height:1;transition:transform .2s}
+.dropdown{display:none;position:absolute;top:calc(100% + 18px);left:-18px;min-width:205px;padding:13px 18px;background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.12)}
+.dropdown a{display:block;padding:7px 0;white-space:nowrap}
+@media(min-width:1181px){.nav-group:hover .dropdown,.nav-group:focus-within .dropdown{display:block}}
 @media(max-width:1180px){
   .nav .links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--paper);padding:25px;flex-direction:column;align-items:flex-start;box-shadow:0 14px 25px rgba(0,0,0,.08)}
   .nav .links.open{display:flex}
   .nav .menu{display:block}
   .nav.dark .links{background:var(--ink)}
+  .nav-group{width:100%}
+  .nav-parent{justify-content:space-between}
+  .dropdown{position:static;margin:8px 0 0 12px;padding:4px 0 5px 16px;border:0;border-left:1px solid var(--line);box-shadow:none;background:transparent;color:inherit}
+  .nav-group.submenu-open .dropdown{display:block}
+  .nav-group.submenu-open .submenu-toggle{transform:rotate(180deg)}
 }
 .price-section h2,.testimonials h2{margin-bottom:45px}
 .price-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
