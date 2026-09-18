@@ -24,3 +24,9 @@
 .split:before{z-index:5;background-image:url('/assets/casta-logo-white.png')}
 .split:after{display:none;z-index:6;background-image:url('/assets/casta-logo-black.png')}
 @media(max-width:800px){.split:before,.split:after{top:22px;width:180px}.split:after{display:block}.portal{padding-top:105px}}
+
+/* Keep the homepage photographs visible beneath the copy. */
+.portal:before{background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.12),transparent 28%)}
+.portal:first-child{background-image:linear-gradient(0deg,rgba(0,0,0,.50),rgba(0,0,0,.04) 72%),url('/assets/home-historias.jpg')}
+.portal:last-child{background-image:linear-gradient(0deg,rgba(0,0,0,.64),rgba(0,0,0,.04) 72%),url('/assets/comercial-restauracao.jpg')}
+.portal h1,.portal p,.portal .eyebrow,.portal .btn{text-shadow:0 1px 14px rgba(0,0,0,.28)}
