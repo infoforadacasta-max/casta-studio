@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /historias/clientes/
+
+Sitemap: https://www.castastudio.pt/sitemap.xml
