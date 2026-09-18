@@ -47,6 +47,15 @@
 .dark .field input,.dark .field select,.dark .field textarea{color:var(--paper);-webkit-text-fill-color:var(--paper);border-bottom-color:rgba(244,241,235,.65);opacity:1}
 .dark .field select option{color:var(--ink);background:var(--paper)}
 .dark .field input::placeholder,.dark .field textarea::placeholder{color:rgba(244,241,235,.6);-webkit-text-fill-color:rgba(244,241,235,.6)}
+.hero h1{line-height:1}
+.photo[data-label="Maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%),url('/assets/maternidade-casal.jpg');background-position:center 62%}
+.photo[data-label="Maternidade"]:after{display:none}
+@media(max-width:1180px){
+  .nav .links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--paper);padding:25px;flex-direction:column;align-items:flex-start;box-shadow:0 14px 25px rgba(0,0,0,.08)}
+  .nav .links.open{display:flex}
+  .nav .menu{display:block}
+  .nav.dark .links{background:var(--ink)}
+}
 .price-section h2,.testimonials h2{margin-bottom:45px}
 .price-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .price-grid article{padding:28px 0;border-top:1px solid var(--line)}
