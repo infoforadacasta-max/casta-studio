@@ -27,6 +27,6 @@
 
 /* Keep the homepage photographs visible beneath the copy. */
 .portal:before{background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.12),transparent 28%)}
-.portal:first-child{background-image:url('/assets/home-historias.jpg');background-position:center center}
+.portal:first-child{background-image:url('/assets/home-historias.jpg?v=2');background-position:center center}
 .portal:last-child{background-image:linear-gradient(0deg,rgba(0,0,0,.64),rgba(0,0,0,.04) 72%),url('/assets/comercial-restauracao.jpg')}
 .portal h1,.portal p,.portal .eyebrow,.portal .btn{text-shadow:0 1px 14px rgba(0,0,0,.28)}
