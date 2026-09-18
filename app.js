@@ -48,13 +48,13 @@ if(path==='/historias/maternidade'){
   document.querySelector('.cta')?.insertAdjacentHTML('beforebegin',testimonials(familyReviews));
   document.querySelectorAll('a[href="/historias/contacto"]').forEach(a=>a.href='/historias/contacto?servico=Maternidade');
   const links={'Gravidez':'/historias/maternidade/gravidez','Newborn':'/historias/maternidade/newborn','Acompanhamento':'/historias/maternidade/acompanhamento','Aniversários':'/historias/maternidade/aniversarios'};
-  document.querySelectorAll('.service').forEach(card=>{const heading=card.querySelector('h3')?.textContent; if(links[heading])card.querySelector('.service-copy')?.insertAdjacentHTML('beforeend',`<a class="btn" href="${links[heading]}">Saber mais</a>`)});
+  document.querySelectorAll('.service').forEach(card=>{const heading=card.querySelector('h3')?.textContent;if(links[heading]){card.classList.add('clickable-card');card.insertAdjacentHTML('beforeend',`<a class="card-link" href="${links[heading]}" aria-label="Ver ${heading}"></a>`)}});
 }
 if(path==='/historias/familias'){
   document.querySelector('.cta')?.insertAdjacentHTML('beforebegin',testimonials(familyReviews.slice(0,2)));
   document.querySelectorAll('a[href="/historias/contacto"]').forEach(a=>a.href='/historias/contacto?servico=Família');
   const links={'Família':'/historias/familias/familia','Casal':'/historias/familias/casal','Retrato individual':'/historias/familias/retrato-individual'};
-  document.querySelectorAll('.service').forEach(card=>{const heading=card.querySelector('h3')?.textContent; if(links[heading])card.querySelector('.service-copy')?.insertAdjacentHTML('beforeend',`<a class="btn" href="${links[heading]}">Saber mais</a>`)});
+  document.querySelectorAll('.service').forEach(card=>{const heading=card.querySelector('h3')?.textContent;if(links[heading]){card.classList.add('clickable-card');card.insertAdjacentHTML('beforeend',`<a class="card-link" href="${links[heading]}" aria-label="Ver ${heading}"></a>`)}});
 }
 if(path==='/historias/batizados'){
   document.querySelector('.gallery')?.insertAdjacentHTML('afterend',prices([['Fotografia','200 €','Cobertura da cerimónia e galeria digital.'],['Fotografia + vídeo','300 €','Cerimónia e vídeo cinematográfico.']]));
@@ -84,9 +84,12 @@ if(requestedService&&form?.querySelector('#type')){
 document.querySelector('.menu')?.addEventListener('click',e=>{const open=document.getElementById('links').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',open)});
 document.querySelectorAll('.submenu-toggle').forEach(button=>button.addEventListener('click',e=>{
   e.preventDefault(); e.stopPropagation();
-  const group=button.closest('.nav-group'); const open=group.classList.toggle('submenu-open');
+  const group=button.closest('.nav-group'); const wasOpen=group.classList.contains('submenu-open');
+  document.querySelectorAll('.nav-group.submenu-open').forEach(item=>{item.classList.remove('submenu-open');item.querySelector('.submenu-toggle')?.setAttribute('aria-expanded','false')});
+  const open=!wasOpen; group.classList.toggle('submenu-open',open);
   button.setAttribute('aria-expanded',String(open));
 }));
+document.addEventListener('click',e=>{if(!e.target.closest('.nav-group'))document.querySelectorAll('.nav-group.submenu-open').forEach(group=>{group.classList.remove('submenu-open');group.querySelector('.submenu-toggle')?.setAttribute('aria-expanded','false')})});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('links')?.classList.remove('open');document.querySelector('.menu')?.setAttribute('aria-expanded','false')}});
 form?.addEventListener('submit',e=>{
   e.preventDefault();
