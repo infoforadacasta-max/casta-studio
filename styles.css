@@ -50,6 +50,17 @@
 .hero h1{line-height:1}
 .photo[data-label="Maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%),url('/assets/maternidade-casal.jpg');background-position:center 62%}
 .photo[data-label="Maternidade"]:after{display:none}
+.wedding-slideshow{background:#201f1c}
+.wedding-slideshow:before{z-index:2;background:linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.08) 70%),linear-gradient(0deg,rgba(0,0,0,.25),transparent 55%)}
+.wedding-slideshow:after{display:none}
+.wedding-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transform:scale(1.025);transition:opacity 1.2s ease,transform 7s ease}
+.wedding-slideshow img.is-active{opacity:1;transform:scale(1);z-index:1}
+.wedding-gallery{padding:0 clamp(12px,3vw,42px) clamp(80px,10vw,150px);display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:85px;gap:12px}
+.wedding-shot{margin:0;overflow:hidden;background:#d7d1c8}
+.wedding-shot img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.wedding-shot:hover img{transform:scale(1.025)}
+.wedding-shot:nth-child(1){grid-column:1/5;grid-row:span 7}.wedding-shot:nth-child(2){grid-column:5/9;grid-row:span 5}.wedding-shot:nth-child(3){grid-column:9/13;grid-row:span 7}.wedding-shot:nth-child(4){grid-column:5/9;grid-row:span 6}.wedding-shot:nth-child(5){grid-column:1/5;grid-row:span 5}.wedding-shot:nth-child(6){grid-column:9/13;grid-row:span 5}.wedding-shot:nth-child(7){grid-column:1/5;grid-row:span 6}.wedding-shot:nth-child(8){grid-column:5/9;grid-row:span 6}.wedding-shot:nth-child(9){grid-column:9/13;grid-row:span 7}.wedding-shot:nth-child(10){grid-column:1/5;grid-row:span 7}.wedding-shot:nth-child(11){grid-column:5/9;grid-row:span 5}.wedding-shot:nth-child(12){grid-column:5/9;grid-row:span 6}.wedding-shot:nth-child(13){grid-column:9/13;grid-row:span 5}
+.travel{background:#eae4da}
 .nav-group{position:relative}
 .nav-parent{display:flex;align-items:center;gap:5px}
 .submenu-toggle{border:0;background:transparent;color:inherit;padding:2px 3px;font:inherit;cursor:pointer;line-height:1;transition:transform .2s}
@@ -88,6 +99,9 @@
 .stars{color:var(--accent);letter-spacing:.12em;font-size:.8rem}
 @media(max-width:800px){
   .price-grid,.testimonial-grid{grid-template-columns:1fr}
+  .wedding-gallery{grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:8px}
+  .wedding-shot:nth-child(n){grid-column:auto;grid-row:auto;aspect-ratio:2/3}
+  .wedding-shot:nth-child(4n+2){aspect-ratio:3/2}
   .eyebrow,.field label,.btn{font-size:.78rem}
   .intro,.section{padding-top:65px;padding-bottom:65px}
   .links{font-size:.86rem;box-shadow:0 14px 25px rgba(0,0,0,.08)}
