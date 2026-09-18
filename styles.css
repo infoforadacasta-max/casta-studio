@@ -39,3 +39,29 @@
 .brand-logo{display:flex;align-items:center;width:128px;height:52px}
 .brand-logo img{display:block;width:100%;height:auto;max-height:48px;object-fit:contain}
 @media(max-width:800px){.brand-logo{width:104px;height:46px}.nav-reveal-zone{height:14px}}
+
+/* Conversion, pricing and social proof. */
+.links a[aria-current="page"]:after{width:100%}
+.field label span,.form-note,.price-note{font-size:.78rem;color:var(--muted);letter-spacing:0;text-transform:none}
+.form-note{margin:0;line-height:1.5}
+.price-section h2,.testimonials h2{margin-bottom:45px}
+.price-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.price-grid article{padding:28px 0;border-top:1px solid var(--line)}
+.price-grid h3{font:400 1.65rem var(--serif);margin:0 0 8px}
+.price-grid strong{font:400 clamp(2rem,3vw,3.5rem)/1 var(--serif)}
+.price-grid p{color:var(--muted)}
+.price-note{margin-top:28px;max-width:680px}
+.testimonials{background:#eae4da}
+.testimonial-grid blockquote{margin:0;padding:30px;border-top:1px solid var(--ink);background:rgba(255,255,255,.22)}
+.testimonial-grid blockquote>p{font:400 clamp(1.25rem,1.7vw,1.6rem)/1.45 var(--serif)}
+.testimonial-grid footer{display:flex;flex-direction:column;font-size:.78rem}
+.testimonial-grid footer span{color:var(--muted)}
+.stars{color:var(--accent);letter-spacing:.12em;font-size:.8rem}
+@media(max-width:800px){
+  .price-grid,.testimonial-grid{grid-template-columns:1fr}
+  .eyebrow,.field label,.btn{font-size:.78rem}
+  .intro,.section{padding-top:65px;padding-bottom:65px}
+  .links{font-size:.86rem;box-shadow:0 14px 25px rgba(0,0,0,.08)}
+  .nav.dark .links{background:var(--ink)}
+  .menu{font-size:.82rem}
+}
