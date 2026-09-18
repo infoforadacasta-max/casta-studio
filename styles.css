@@ -44,6 +44,9 @@
 .links a[aria-current="page"]:after{width:100%}
 .field label span,.form-note,.price-note{font-size:.78rem;color:var(--muted);letter-spacing:0;text-transform:none}
 .form-note{margin:0;line-height:1.5}
+.dark .field input,.dark .field select,.dark .field textarea{color:var(--paper);-webkit-text-fill-color:var(--paper);border-bottom-color:rgba(244,241,235,.65);opacity:1}
+.dark .field select option{color:var(--ink);background:var(--paper)}
+.dark .field input::placeholder,.dark .field textarea::placeholder{color:rgba(244,241,235,.6);-webkit-text-fill-color:rgba(244,241,235,.6)}
 .price-section h2,.testimonials h2{margin-bottom:45px}
 .price-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .price-grid article{padding:28px 0;border-top:1px solid var(--line)}
