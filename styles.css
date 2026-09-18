@@ -30,3 +30,12 @@
 .portal:first-child{background-image:url('/assets/home-historias.jpg?v=2');background-position:center center}
 .portal:last-child{background-image:linear-gradient(0deg,rgba(0,0,0,.64),rgba(0,0,0,.04) 72%),url('/assets/comercial-restauracao.jpg')}
 .portal h1,.portal p,.portal .eyebrow,.portal .btn{text-shadow:0 1px 14px rgba(0,0,0,.28)}
+
+/* Branded, auto-hiding navigation. */
+.nav{position:sticky;top:0;background:var(--paper);transition:transform .32s ease;will-change:transform}
+.nav.dark{background:var(--ink)}
+.nav.nav-hidden{transform:translateY(-105%)}
+.nav-reveal-zone{position:fixed;z-index:19;top:0;left:0;right:0;height:18px}
+.brand-logo{display:flex;align-items:center;width:128px;height:52px}
+.brand-logo img{display:block;width:100%;height:auto;max-height:48px;object-fit:contain}
+@media(max-width:800px){.brand-logo{width:104px;height:46px}.nav-reveal-zone{height:14px}}
