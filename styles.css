@@ -120,4 +120,8 @@
 .service-media-label{position:absolute;z-index:2;left:clamp(20px,3vw,42px);bottom:clamp(20px,3vw,36px);padding:10px 0;border-bottom:1px solid currentColor;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
 .service-media:hover .photo{transform:scale(1.025)}
 .service-media:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.services-simple{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.services-simple .service,.services-simple .service:nth-child(even){display:block;min-height:0;border-top:0}
+.services-simple .service-media{height:min(70vw,760px)}
 @media(max-width:800px){.service-media{min-height:58svh}.service-media .photo{min-height:0}.service-media-label{font-size:.82rem}}
+@media(max-width:800px){.services-simple{grid-template-columns:1fr;padding-left:0;padding-right:0;gap:6px}.services-simple .service-media{height:72svh;min-height:0}.services-simple .service-media-label{left:28px;bottom:28px}.services-simple .service-media-label span{display:none}}
