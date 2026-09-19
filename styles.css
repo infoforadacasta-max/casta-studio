@@ -7,15 +7,15 @@
 /* CASTA brand typography and selected portfolio imagery */
 :root{--serif:'Cormorant Garamond',Georgia,serif;--sans:'Manrope',Arial,sans-serif}
 .photo{background-position:center;background-size:cover;background-repeat:no-repeat}
-.photo[data-label="imagem principal — Histórias"]{background-image:linear-gradient(0deg,rgba(0,0,0,.32),rgba(0,0,0,.02) 62%),url('/assets/casamento-casal.jpg');background-position:center 38%}
-.photo[data-label="Maternidade e família"],.photo[data-label="imagem principal — maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%),url('/assets/maternidade-casal.jpg');background-position:center 62%}
+.photo[data-label="imagem principal, Histórias"]{background-image:linear-gradient(0deg,rgba(0,0,0,.32),rgba(0,0,0,.02) 62%),url('/assets/casamento-casal.jpg');background-position:center 38%}
+.photo[data-label="Maternidade e família"],.photo[data-label="imagem principal, maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.18),transparent 55%),url('/assets/maternidade-casal.jpg');background-position:center 62%}
 .photo[data-label="projeto comercial"]{background-image:linear-gradient(0deg,rgba(0,0,0,.58),rgba(0,0,0,.04) 65%),url('/assets/comercial-evento.jpg');background-position:center 48%}
 .photo[data-label="Produto"]{background-image:url('/assets/comercial-restauracao.jpg');background-position:center 48%}
 .photo[data-label="Campanha"]{background-image:url('/assets/comercial-evento.jpg');background-position:center 48%}
 .portal:first-child{background-image:linear-gradient(0deg,rgba(0,0,0,.62),rgba(0,0,0,0) 66%),url('/assets/home-historias.jpg');background-position:center;background-size:cover}
 .portal:last-child{background-image:linear-gradient(0deg,rgba(0,0,0,.76),rgba(0,0,0,.06) 66%),url('/assets/comercial-restauracao.jpg');background-position:center;background-size:cover}
-.photo[data-label="imagem principal — Histórias"]:after,.photo[data-label="Maternidade e família"]:after,.photo[data-label="imagem principal — maternidade"]:after,.photo[data-label="projeto comercial"]:after,.photo[data-label="Produto"]:after,.photo[data-label="Campanha"]:after{display:none}
-@media(max-width:800px){.portal:first-child{background-position:58% center}.portal:last-child{background-position:center 48%}.photo[data-label="imagem principal — Histórias"]{background-position:58% center}.photo[data-label="imagem principal — maternidade"]{background-position:54% center}}
+.photo[data-label="imagem principal, Histórias"]:after,.photo[data-label="Maternidade e família"]:after,.photo[data-label="imagem principal, maternidade"]:after,.photo[data-label="projeto comercial"]:after,.photo[data-label="Produto"]:after,.photo[data-label="Campanha"]:after{display:none}
+@media(max-width:800px){.portal:first-child{background-position:58% center}.portal:last-child{background-position:center 48%}.photo[data-label="imagem principal, Histórias"]{background-position:58% center}.photo[data-label="imagem principal, maternidade"]{background-position:54% center}}
 
 /* Homepage: one shared CASTA logo centred over both universes */
 .split{position:relative}
