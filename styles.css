@@ -129,3 +129,8 @@
 .services-simple .service-media{height:min(70vw,760px)}
 @media(max-width:800px){.service-media{min-height:58svh}.service-media .photo{min-height:0}.service-media-label{font-size:.82rem}}
 @media(max-width:800px){.services-simple{grid-template-columns:1fr;padding-left:0;padding-right:0;gap:6px}.services-simple .service-media{height:72svh;min-height:0}.services-simple .service-media-label{left:28px;bottom:28px}.services-simple .service-media-label span{display:none}}
+.legal-page{max-width:980px;margin:auto}
+.legal-page h1{font:400 clamp(3.5rem,8vw,7rem)/.95 var(--serif);margin:16px 0 45px}
+.legal-page h2{font:400 clamp(1.8rem,3vw,2.8rem)/1.1 var(--serif);margin:55px 0 14px}
+.legal-page p:not(.lead){max-width:760px;color:var(--muted)}
+.legal-page a{text-decoration:underline;text-underline-offset:3px}
