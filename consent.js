@@ -1,7 +1,7 @@
 (()=>{
   const STORAGE_KEY='casta_cookie_consent_v1';
   const MAX_AGE=180*24*60*60*1000;
-  const ANALYTICS_ID='';
+  const ANALYTICS_ID='G-7MP2VJXNYW';
 
   const readConsent=()=>{
     try{
