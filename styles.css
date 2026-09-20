@@ -134,3 +134,14 @@
 .legal-page h2{font:400 clamp(1.8rem,3vw,2.8rem)/1.1 var(--serif);margin:55px 0 14px}
 .legal-page p:not(.lead){max-width:760px;color:var(--muted)}
 .legal-page a{text-decoration:underline;text-underline-offset:3px}
+
+
+/* Real CASTA maternity portfolio */
+.photo[data-label="imagem principal, maternidade"]{background-image:linear-gradient(0deg,rgba(0,0,0,.28),transparent 60%),url('/assets/maternity/hero.webp');background-position:center 48%}
+.photo[data-label="Gravidez"]{background-image:url('/assets/maternity/gravidez.webp');background-size:cover;background-position:center}
+.photo[data-label="Newborn"]{background-image:url('/assets/maternity/newborn.webp');background-size:cover;background-position:center}
+.photo[data-label="Acompanhamento"]{background-image:url('/assets/maternity/acompanhamento.webp');background-size:cover;background-position:center}
+.photo[data-label="Aniversário"]{background-image:url('/assets/maternity/aniversario.webp');background-size:cover;background-position:center}
+.photo[data-label="Pequenos gestos"]{background-image:url('/assets/maternity/gestos.webp');background-size:cover;background-position:center}
+.photo[data-label="imagem principal, maternidade"]:after,.photo[data-label="Gravidez"]:after,.photo[data-label="Newborn"]:after,.photo[data-label="Acompanhamento"]:after,.photo[data-label="Aniversário"]:after,.photo[data-label="Pequenos gestos"]:after{display:none}
+@media(max-width:800px){.photo[data-label="imagem principal, maternidade"]{background-position:center 48%}}
