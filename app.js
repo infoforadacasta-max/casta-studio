@@ -206,7 +206,7 @@ if(siteNav){
     const href=a.href||'';
     const label=(a.textContent||a.getAttribute('aria-label')||'').trim().slice(0,100);
     const params={service:serviceFromPage(),link_text:label};
-    if(href.includes('wa.me/'))track('click_whatsapp',params);
+    if((href.includes('wa.me/')||href.includes('api.whatsapp.com/')||href.includes('whatsapp://'))&&!a.dataset.leadForm)track('click_whatsapp',params);
     else if(href.startsWith('mailto:'))track('click_email',params);
     else if(href.includes('instagram.com/'))track('click_social',{...params,social_network:'instagram'});
     else if(a.classList.contains('btn')&&(href.includes('/contacto')||href.includes('/booking')))track('contact_cta',params);
@@ -223,6 +223,7 @@ if(siteNav){
   });
   const leadForm=document.getElementById('contact-form');
   if(leadForm){
+    leadForm.querySelectorAll('a[href*="wa.me"],a[href*="api.whatsapp.com"],a[href^="whatsapp:"]').forEach(a=>a.dataset.leadForm='1');
     leadForm.addEventListener('submit',()=>{
       track('generate_lead',{service:leadForm.querySelector('[name="Tipo"]')?.value||serviceFromPage(),form_universe:leadForm.dataset.universe||'',contact_method:'whatsapp'});
     });
