@@ -223,11 +223,6 @@ if(siteNav){
   });
   const leadForm=document.getElementById('contact-form');
   if(leadForm){
-    let started=false;
-    leadForm.addEventListener('input',()=>{
-      if(started)return; started=true;
-      track('form_start',{service:leadForm.querySelector('[name="Tipo"]')?.value||serviceFromPage(),form_universe:leadForm.dataset.universe||''});
-    },{once:true});
     leadForm.addEventListener('submit',()=>{
       track('generate_lead',{service:leadForm.querySelector('[name="Tipo"]')?.value||serviceFromPage(),form_universe:leadForm.dataset.universe||'',contact_method:'whatsapp'});
     });
