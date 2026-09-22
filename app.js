@@ -197,6 +197,30 @@ if(siteNav){
   siteNav.addEventListener('mouseleave',()=>{topHover=false;conceal()});
 }
 
+// Keep mixed portrait and landscape portfolios tightly packed without cropping.
+const layoutMasonryGallery=gallery=>{
+  const styles=getComputedStyle(gallery);
+  const rowHeight=parseFloat(styles.gridAutoRows)||8;
+  const gap=parseFloat(styles.rowGap)||10;
+  gallery.querySelectorAll('.wedding-shot').forEach(figure=>{
+    const img=figure.querySelector('img');
+    if(!img)return;
+    const place=()=>requestAnimationFrame(()=>{
+      const height=img.getBoundingClientRect().height;
+      if(height)figure.style.gridRowEnd=`span ${Math.ceil((height+gap)/(rowHeight+gap))}`;
+    });
+    if(img.complete)place();
+    else img.addEventListener('load',place,{once:true});
+  });
+};
+const masonryGalleries=[...document.querySelectorAll('.wedding-gallery')];
+masonryGalleries.forEach(layoutMasonryGallery);
+let masonryResizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(masonryResizeTimer);
+  masonryResizeTimer=setTimeout(()=>masonryGalleries.forEach(layoutMasonryGallery),120);
+},{passive:true});
+
 
 // CASTA Analytics: commercial-intent event tracking
 (()=>{
@@ -216,8 +240,8 @@ if(siteNav){
     if(p.includes('/maternidade/acompanhamento'))return 'acompanhamento';
     if(p.includes('/maternidade/aniversarios'))return 'aniversarios';
     if(p.includes('/maternidade'))return 'maternidade';
-    if(p.includes('/familias/familia'))return 'familia';
-    if(p.includes('/familias/casal'))return 'casal';
+    if(p.includes('/familias-retratos/familia'))return 'familia';
+    if(p.includes('/familias-retratos/casal'))return 'casal';
     if(p.includes('/retrato-individual'))return 'retrato_individual';
     if(p.includes('/familias'))return 'familias_retratos';
     if(p.includes('/batizados'))return 'batizados';
