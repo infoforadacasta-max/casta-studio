@@ -171,3 +171,65 @@ if(siteNav){
   siteNav.addEventListener('mouseenter',()=>{topHover=true;reveal()});
   siteNav.addEventListener('mouseleave',()=>{topHover=false;conceal()});
 }
+
+
+// CASTA Analytics: commercial-intent event tracking
+(()=>{
+  const track=(name,params={})=>{
+    if(typeof window.gtag!=='function')return;
+    window.gtag('event',name,{
+      area:location.pathname.startsWith('/comercial')?'marcas_empresas':location.pathname.startsWith('/historias')?'pessoas_momentos':'entrada',
+      page_path:location.pathname,
+      ...params
+    });
+  };
+  const serviceFromPage=()=>{
+    const p=location.pathname;
+    if(p.includes('/casamentos'))return 'casamentos';
+    if(p.includes('/maternidade/gravidez'))return 'gravidez';
+    if(p.includes('/maternidade/newborn'))return 'newborn';
+    if(p.includes('/maternidade/acompanhamento'))return 'acompanhamento';
+    if(p.includes('/maternidade/aniversarios'))return 'aniversarios';
+    if(p.includes('/maternidade'))return 'maternidade';
+    if(p.includes('/familias/familia'))return 'familia';
+    if(p.includes('/familias/casal'))return 'casal';
+    if(p.includes('/retrato-individual'))return 'retrato_individual';
+    if(p.includes('/familias'))return 'familias_retratos';
+    if(p.includes('/batizados'))return 'batizados';
+    if(p.includes('/escolar'))return 'fotografia_escolar';
+    if(p.startsWith('/comercial'))return 'comercial';
+    return 'geral';
+  };
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a');
+    if(!a)return;
+    const href=a.href||'';
+    const label=(a.textContent||a.getAttribute('aria-label')||'').trim().slice(0,100);
+    const params={service:serviceFromPage(),link_text:label};
+    if(href.includes('wa.me/'))track('click_whatsapp',params);
+    else if(href.startsWith('mailto:'))track('click_email',params);
+    else if(href.includes('instagram.com/'))track('click_social',{...params,social_network:'instagram'});
+    else if(a.classList.contains('btn')&&(href.includes('/contacto')||href.includes('/booking')))track('contact_cta',params);
+    else if(href.includes('clientes.castastudio.pt'))track('client_gallery_click',params);
+  });
+  document.querySelectorAll('.gallery,.wedding-gallery').forEach(gallery=>{
+    let sent=false;
+    const observer=new IntersectionObserver(entries=>{
+      if(!sent&&entries.some(x=>x.isIntersecting)){
+        sent=true; track('view_portfolio',{service:serviceFromPage()}); observer.disconnect();
+      }
+    },{threshold:.35});
+    observer.observe(gallery);
+  });
+  const leadForm=document.getElementById('contact-form');
+  if(leadForm){
+    let started=false;
+    leadForm.addEventListener('input',()=>{
+      if(started)return; started=true;
+      track('form_start',{service:leadForm.querySelector('[name="Tipo"]')?.value||serviceFromPage(),form_universe:leadForm.dataset.universe||''});
+    },{once:true});
+    leadForm.addEventListener('submit',()=>{
+      track('generate_lead',{service:leadForm.querySelector('[name="Tipo"]')?.value||serviceFromPage(),form_universe:leadForm.dataset.universe||'',contact_method:'whatsapp'});
+    });
+  }
+})();
