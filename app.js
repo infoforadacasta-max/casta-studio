@@ -48,6 +48,19 @@ const school=`<div class="nav-reveal-zone" aria-hidden="true"></div><header clas
 const commercialContact=`<div class="nav-reveal-zone" aria-hidden="true"></div><header class="nav dark"><a class="brand brand-logo" href="/" aria-label="CASTA Studio"><img src="/assets/casta-logo-white.png" alt="CASTA"></a><nav class="links" id="links"><a href="/pessoas">Histórias</a><a href="/marcas">Comercial</a><a href="/marcas/escolar">Fotografia Escolar</a><a href="/marcas/contacto">Contacto</a></nav><button class="menu" aria-expanded="false" aria-controls="links" aria-label="Abrir menu">MENU</button></header><main class="dark"><section class="section contact"><div><span class="eyebrow">Contacto Comercial</span><h2>Fala-nos do teu projeto.</h2><p>Conta-nos o que precisas, onde a imagem vai ser usada e quando gostarias de produzir. Abriremos o WhatsApp Marcas & Empresas com o pedido completo.</p><p>Alenquer, Portugal</p></div><form class="form" id="contact-form" data-whatsapp="351913415383" data-universe="Comercial"><div class="field"><label for="name">Nome</label><input id="name" name="Nome" required></div><div class="field"><label for="email">Email</label><input id="email" name="Email" type="email" required></div><div class="field"><label for="type">Tipo de projeto</label><select id="type" name="Tipo" required><option value="">Escolher</option><option>Fotografia de produto</option><option>Retrato corporativo</option><option>Fotografia Escolar</option><option>Espaços / Imobiliário</option><option>Restauração & Hospitality</option><option>Evento</option><option>Vídeo</option><option>Conteúdo para redes sociais</option><option>Outro</option></select></div><div class="field"><label for="date">Data pretendida</label><input id="date" name="Data" type="date"></div><div class="field full"><label for="location">Localização</label><input id="location" name="Localização"></div><div class="field full"><label for="message">O que tens em mente? <span>(opcional)</span></label><textarea id="message" name="Mensagem"></textarea></div><div class="field full"><button class="btn" type="submit">Enviar pelo WhatsApp</button></div><p class="form-note full">Ao continuar, o WhatsApp abre com estes dados numa mensagem. Só será enviada quando confirmares.</p></form></section></main>${commercialFooter()}`;
 const pages={'/':home,'/pessoas':historias,'/pessoas/casamentos':wedding,'/pessoas/maternidade-bebe':maternity,'/pessoas/maternidade-bebe/gravidez':pregnancy,'/pessoas/maternidade-bebe/newborn':newborn,'/pessoas/maternidade-bebe/acompanhamento':followUp,'/pessoas/maternidade-bebe/aniversarios':birthdays,'/pessoas/familia-pessoas':families,'/pessoas/familia-pessoas/familia':familySession,'/pessoas/familia-pessoas/casal':coupleSession,'/pessoas/familia-pessoas/retrato-individual':individualPortrait,'/pessoas/celebracoes':baptism,'/pessoas/sobre':about,'/pessoas/contacto':contact,'/marcas':commercial,'/marcas/escolar':school,'/marcas/contacto':commercialContact};
 document.getElementById('app').innerHTML=pages[path]||historias;
+if(path.startsWith('/pessoas')){
+  const mainEl=document.querySelector('main');
+  if(mainEl && path!=='/pessoas/contacto'){
+    const directWa=document.createElement('a');
+    directWa.className='whatsapp-direct';
+    directWa.href='https://wa.me/351919592819';
+    directWa.target='_blank';
+    directWa.rel='noopener noreferrer';
+    directWa.setAttribute('aria-label','Falar com a CASTA pelo WhatsApp');
+    directWa.textContent='WhatsApp';
+    mainEl.appendChild(directWa);
+  }
+}
 
 // Enrich the service pages with practical information, prices and real client feedback.
 const main=document.querySelector('main');
