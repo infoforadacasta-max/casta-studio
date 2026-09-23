@@ -51,3 +51,16 @@
 .natal-faq details p{font-size:.91rem;line-height:1.7;margin:12px 0 0;color:#51594e}
 .natal-faq details a{color:#7e3030;text-underline-offset:3px}
 @media(max-width:850px){.natal-before,.natal-faq-layout{grid-template-columns:1fr}.natal-hero::before{left:7vw}.natal-hero-copy{padding-top:90px}.natal-before{gap:24px}}
+
+/* The package cards are the first step of the booking flow. */
+.natal-packs{padding-top:clamp(48px,6vw,85px);padding-bottom:clamp(48px,6vw,85px)}
+.natal-pack-grid{margin-top:24px}
+.natal-pack-grid article{min-height:0}
+.natal-booking{display:block;padding-top:clamp(45px,6vw,80px);padding-bottom:clamp(45px,6vw,80px)}
+.natal-booking>div:first-child{max-width:900px}
+.natal-booking h2{margin-bottom:12px}
+.natal-booking p{margin:10px 0}
+.natal-calendar{margin-top:20px}
+.natal-selected-pack{font-weight:600}
+.natal-calendar iframe{height:590px;background:#f5f4ee}
+@media(max-width:750px){.natal-calendar iframe{height:850px}}
