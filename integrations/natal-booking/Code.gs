@@ -19,10 +19,28 @@ function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-function studioCalendar_() {
-  const calendar = CalendarApp.getCalendarById(CONFIG.calendarId);
-  if (!calendar) throw new Error('A agenda CASTA não está acessível a esta conta.');
-  return calendar;
+// Calendar API advanced service: event access only, scoped to calendars owned by CASTA.
+function listSeasonEvents_() {
+  const result = [];
+  let pageToken;
+  do {
+    const page = Calendar.Events.list(CONFIG.calendarId, {
+      timeMin: localDate_(CONFIG.seasonStart, 0).toISOString(),
+      timeMax: localDate_('2026-12-07', 0).toISOString(),
+      singleEvents: true,
+      showDeleted: false,
+      maxResults: 2500,
+      pageToken
+    });
+    result.push(...(page.items || []));
+    pageToken = page.nextPageToken;
+  } while (pageToken);
+  return result;
+}
+function eventTime_(value) {
+  if (value.dateTime) return new Date(value.dateTime);
+  // All-day event dates refer to midnight in the studio time zone.
+  return localDate_(value.date, 0);
 }
 function localDate_(day, hour) {
   // Construct local time in the Apps Script project timezone (Europe/Lisbon).
@@ -36,25 +54,21 @@ function validDay_(day) {
   return dayString_(date) === day && (date.getDay() === 0 || date.getDay() === 6);
 }
 function pending_(event) {
-  if (!event.getTitle().startsWith('[CASTA NATAL PENDENTE]')) return null;
-  const description = event.getDescription() || '';
+  if (!(event.summary || '').startsWith('[CASTA NATAL PENDENTE]')) return null;
+  const description = event.description || '';
   if (!description.startsWith(CONFIG.prefix)) return null;
   try { return JSON.parse(description.slice(CONFIG.prefix.length)); } catch (_) { return null; }
 }
-function seasonEvents_(calendar) {
-  return calendar.getEvents(localDate_(CONFIG.seasonStart, 0), localDate_('2026-12-07', 0));
-}
-function activeEvents_(calendar) {
+function activeEvents_() {
   const now = Date.now();
-  const events = seasonEvents_(calendar);
-  return events.filter(event => {
+  return listSeasonEvents_().filter(event => {
     const record = pending_(event);
     if (record && Number(record.expiresAt) <= now) return false;
-    return event.getTransparency() !== CalendarApp.EventTransparency.TRANSPARENT;
+    return event.transparency !== 'transparent' && event.status !== 'cancelled';
   });
 }
 function overlaps_(event, start, end) {
-  return event.getStartTime().getTime() < end.getTime() && event.getEndTime().getTime() > start.getTime();
+  return eventTime_(event.start).getTime() < end.getTime() && eventTime_(event.end).getTime() > start.getTime();
 }
 function availableHours_(day, events) {
   return CONFIG.slotHours.filter(hour => {
@@ -63,7 +77,7 @@ function availableHours_(day, events) {
   });
 }
 function getAvailability() {
-  const events = activeEvents_(studioCalendar_());
+  const events = activeEvents_();
   const result = [];
   for (let day = localDate_(CONFIG.seasonStart, 12); day <= localDate_(CONFIG.seasonEnd, 12); day.setDate(day.getDate() + 1)) {
     const date = dayString_(day);
@@ -94,15 +108,20 @@ function bookSession(input) {
   lock.waitLock(15000);
   let record;
   try {
-    const calendar = studioCalendar_();
-    const events = activeEvents_(calendar);
+    const events = activeEvents_();
     if (!availableHours_(day, events).includes(hour)) throw new Error('Esta vaga acabou de ser ocupada. Escolhe outra hora.');
     const sameEmail = events.filter(event => { const pending = pending_(event); return pending && pending.email === email; });
     if (sameEmail.length >= 2) throw new Error('Já existem duas pré-reservas associadas a este email. Contacta-nos para alterar uma delas.');
     record = { id: Utilities.getUuid(), name, email, phone, note, day, time, pack, price: allowedPacks[pack], expiresAt: Date.now() + CONFIG.holdHours * 3600000 };
     const start = localDate_(day, hour);
-    const event = calendar.createEvent('[CASTA NATAL PENDENTE] ' + pack, start, new Date(start.getTime() + 3600000), { description: CONFIG.prefix + JSON.stringify(record), location: 'Estúdio CASTA · Merceana, Alenquer' });
-    event.setVisibility(CalendarApp.Visibility.PRIVATE);
+    Calendar.Events.insert({
+      summary: '[CASTA NATAL PENDENTE] ' + pack,
+      description: CONFIG.prefix + JSON.stringify(record),
+      location: 'Estúdio CASTA · Merceana, Alenquer',
+      start: { dateTime: start.toISOString(), timeZone: CONFIG.timeZone },
+      end: { dateTime: new Date(start.getTime() + 3600000).toISOString(), timeZone: CONFIG.timeZone },
+      visibility: 'private'
+    }, CONFIG.calendarId);
   } finally { lock.releaseLock(); }
   const when = `${day} às ${time}`;
   try {

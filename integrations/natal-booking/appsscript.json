@@ -1,0 +1,14 @@
+{
+  "timeZone": "Europe/Lisbon",
+  "runtimeVersion": "V8",
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/calendar.events.owned",
+    "https://www.googleapis.com/auth/script.send_mail"
+  ],
+  "dependencies": {
+    "enabledAdvancedServices": [
+      { "userSymbol": "Calendar", "serviceId": "calendar", "version": "v3" }
+    ]
+  }
+}
