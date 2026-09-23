@@ -24,3 +24,6 @@ document.getElementById('gift-request').addEventListener('submit',event=>{
  const message=`Olá Nádia e Ruben! Gostava de oferecer um voucher de Natal CASTA.\n\nPack: ${data.get('pack')}\nPara: ${data.get('destinatario')}\nDe: ${data.get('remetente')}\nEmail: ${data.get('email')}${data.get('dedicatoria')?`\nDedicatória: ${data.get('dedicatoria')}`:''}\n\nPodem indicar-me os dados de pagamento e confirmar como recebo o voucher digital?`;
  window.open(`https://wa.me/351919592819?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
 });
+
+const menu=document.querySelector('.menu');menu?.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));document.getElementById('links')?.classList.toggle('open',!expanded)});
+document.querySelectorAll('.submenu-toggle').forEach(button=>button.addEventListener('click',()=>{const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));button.closest('.nav-group')?.classList.toggle('open',!expanded)}));
