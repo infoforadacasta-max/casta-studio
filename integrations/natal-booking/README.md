@@ -16,7 +16,7 @@ A página do site já contém o espaço para esta agenda. Enquanto o endereço d
 - Os dias de 24 de outubro a 6 de dezembro de 2026 são sábados e domingos. Eventos Google marcados como **Ocupado** bloqueiam horas; os marcados **Disponível** não bloqueiam.
 - Ao clicar em pré-reservar, o serviço volta a consultar a agenda dentro de um bloqueio para impedir duas reservas simultâneas da mesma hora.
 - A pré-reserva cria um evento de uma hora e envia instruções para o sinal de 20 € por MB WAY. O pagamento é verificado manualmente pela CASTA.
-- O evento pendente liberta a vaga após 24 horas sem confirmação. A limpeza ocorre quando alguém consulta ou tenta marcar a agenda. Para limpeza pontual sem visitas, cria um acionador horário para `cleanupExpiredReservations`.
+- Uma pré-reserva vencida deixa de bloquear a vaga ao fim de 24 horas, mas o evento antigo continua na agenda com o título **PENDENTE** para poderes verificar o histórico e apagá-lo manualmente se quiseres. O sistema nunca apaga eventos da agenda.
 - Depois de verificar o pagamento, nas **Definições do projeto → Propriedades do script**, adiciona `CASTA_CONFIRM_ID` com o ID indicado no email ao estúdio. No editor, executa `confirmFromEditor`. Isso preserva a vaga, envia confirmação ao cliente e apaga essa propriedade. Nunca confirmes o evento apenas alterando o título à mão.
 - O endereço do serviço não contém credenciais. A aplicação corre na conta Google da CASTA; o site e os visitantes não recebem acesso direto à agenda. Ainda assim, um endpoint público pode receber spam. Antes de lançar publicidade, monitoriza os pedidos e as quotas de email do Apps Script.
 

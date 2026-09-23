@@ -49,10 +49,7 @@ function activeEvents_(calendar) {
   const events = seasonEvents_(calendar);
   return events.filter(event => {
     const record = pending_(event);
-    if (record && Number(record.expiresAt) <= now) {
-      event.deleteEvent();
-      return false;
-    }
+    if (record && Number(record.expiresAt) <= now) return false;
     return event.getTransparency() !== CalendarApp.EventTransparency.TRANSPARENT;
   });
 }
@@ -144,10 +141,4 @@ function confirmFromEditor() {
   const result = confirmReservation_(id);
   properties.deleteProperty('CASTA_CONFIRM_ID');
   return result;
-}
-
-function cleanupExpiredReservations() {
-  const lock = LockService.getScriptLock();
-  lock.waitLock(15000);
-  try { activeEvents_(studioCalendar_()); } finally { lock.releaseLock(); }
 }
