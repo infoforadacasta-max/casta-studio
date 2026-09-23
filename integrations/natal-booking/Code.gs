@@ -116,29 +116,3 @@ function bookSession(input) {
   }
   return {ok: true, id: record.id, emailSent: true};
 }
-/** Private: browser visitors cannot call functions ending in _. */
-function confirmReservation_(id) {
-  const calendar = studioCalendar_();
-  const event = seasonEvents_(calendar).find(item => { const record = pending_(item); return record && record.id === id; });
-  if (!event) throw new Error('Pré-reserva não encontrada ou já expirada.');
-  const record = pending_(event);
-  if (record.expiresAt <= Date.now()) throw new Error('Pré-reserva expirada. Verifica o horário antes de confirmar.');
-  event.setTitle('[CASTA NATAL CONFIRMADA] ' + record.pack);
-  event.setDescription('CASTA Natal · ' + JSON.stringify({...record, confirmedAt: Date.now()}));
-  MailApp.sendEmail({to: record.email, replyTo: CONFIG.studioEmail, subject: 'CASTA · Sessão de Natal confirmada', body:
-    `Olá ${record.name},\n\nRecebemos o sinal e confirmámos a sessão ${record.pack} para ${record.day} às ${record.time}.\n\nAté breve no estúdio, na Merceana!\n\nNádia & Ruben · CASTA Studio`});
-  return 'Confirmada: ' + record.id;
-}
-
-/** Studio-only: after verifying MB WAY, set the CASTA_CONFIRM_ID script property
- * to the ID in the notification, then run this function from the script editor.
- * It removes the property so the same confirmation cannot be repeated.
- */
-function confirmFromEditor() {
-  const properties = PropertiesService.getScriptProperties();
-  const id = properties.getProperty('CASTA_CONFIRM_ID');
-  if (!id) throw new Error('Define a propriedade CASTA_CONFIRM_ID com o ID da pré-reserva.');
-  const result = confirmReservation_(id);
-  properties.deleteProperty('CASTA_CONFIRM_ID');
-  return result;
-}
