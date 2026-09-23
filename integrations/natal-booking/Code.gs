@@ -13,8 +13,12 @@ const CONFIG = Object.freeze({
   prefix: 'CASTA_NATAL_2026:'
 });
 
-function doGet() {
-  return HtmlService.createHtmlOutputFromFile('Booking')
+function doGet(e) {
+  const selected = String((e && e.parameter && e.parameter.pack) || '');
+  const allowed = ['Essencial', 'Completo', 'Memórias em Movimento'];
+  const page = HtmlService.createTemplateFromFile('Booking');
+  page.selectedPack = allowed.includes(selected) ? selected : '';
+  return page.evaluate()
     .setTitle('Mini-sessões de Natal | CASTA Studio')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
