@@ -4,3 +4,5 @@
 
 /* Use the same navigation as the rest of Pessoas & Momentos. */
 .natal-main{margin:0}.nav{background:var(--paper);position:sticky;top:0;z-index:20}.nav .links{box-shadow:none}.nav .links a[aria-current]{font-weight:750}.natal-hero{margin-top:0}@media(max-width:800px){.nav .links{box-shadow:0 14px 25px rgba(0,0,0,.08)}}
+
+.natal-booking:has(.natal-calendar:not([hidden])){grid-template-columns:1fr}.natal-booking:has(.natal-calendar:not([hidden]))>div:first-child{max-width:800px}.natal-calendar iframe{display:block;width:100%;height:950px;background:#e9e7df;border:0}.natal-calendar[hidden],#natal-manual[hidden]{display:none!important}@media(max-width:750px){.natal-calendar iframe{height:1350px}}
