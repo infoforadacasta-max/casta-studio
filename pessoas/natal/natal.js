@@ -3,7 +3,18 @@ const timeInput=document.getElementById('natal-time');
 const dateGrid=document.getElementById('natal-date-grid');
 const timeGrid=document.getElementById('natal-time-grid');
 const choice=document.getElementById('natal-choice');
-document.querySelectorAll('[data-pack]').forEach(link=>link.addEventListener('click',()=>{document.getElementById('natal-pack').value=link.dataset.pack}));
+document.querySelectorAll('[data-pack]').forEach(link=>link.addEventListener('click',()=>{
+ const pack=link.dataset.pack.split(' · ')[0];
+ document.getElementById('natal-pack').value=link.dataset.pack;
+ if(window.CASTA_NATAL_BOOKING_URL){
+  const frame=document.getElementById('natal-calendar-frame');
+  const url=new URL(window.CASTA_NATAL_BOOKING_URL);
+  url.searchParams.set('pack',pack);
+  frame.src=url.href;
+  document.getElementById('natal-selected-pack').textContent=`Pack escolhido: ${link.dataset.pack}. Para mudar, escolhe outro pack acima.`;
+  document.getElementById('natal-calendar').hidden=false;
+ }
+}));
 for(let d=new Date(2026,9,24);d<=new Date(2026,11,6);d.setDate(d.getDate()+1)){
  if(d.getDay()!==0&&d.getDay()!==6)continue;
  const day=new Date(d);
@@ -45,10 +56,5 @@ const menu=document.querySelector('.menu');menu?.addEventListener('click',()=>{c
 document.querySelectorAll('.submenu-toggle').forEach(button=>button.addEventListener('click',()=>{const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));button.closest('.nav-group')?.classList.toggle('submenu-open',!expanded)}));
 
 if (window.CASTA_NATAL_BOOKING_URL && /^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec(?:\?.*)?$/.test(window.CASTA_NATAL_BOOKING_URL)) {
- const calendar=document.getElementById('natal-calendar');
- document.getElementById('natal-calendar-frame').src=window.CASTA_NATAL_BOOKING_URL;
- calendar.hidden=false;
  document.getElementById('natal-manual').hidden=true;
- const intro=document.querySelector('.natal-booking > div:first-child p');
- if(intro)intro.textContent='Escolham o pack, vejam quantas vagas restam em cada dia e reservem a hora que preferem.';
 }
