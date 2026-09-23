@@ -6,3 +6,47 @@
 .natal-main{margin:0}.nav{background:var(--paper);position:sticky;top:0;z-index:20}.nav .links{box-shadow:none}.nav .links a[aria-current]{font-weight:750}.natal-hero{margin-top:0}@media(max-width:800px){.nav .links{box-shadow:0 14px 25px rgba(0,0,0,.08)}}
 
 .natal-booking:has(.natal-calendar:not([hidden])){grid-template-columns:1fr}.natal-booking:has(.natal-calendar:not([hidden]))>div:first-child{max-width:800px}.natal-calendar iframe{display:block;width:100%;height:950px;background:#e9e7df;border:0}.natal-calendar[hidden],#natal-manual[hidden]{display:none!important}@media(max-width:750px){.natal-calendar iframe{height:1350px}}
+
+/* Natal CASTA: forest green, warm paper, small decorative details. */
+.natal-main{background:#f8f5ed;color:#263229}
+.natal-hero{position:relative;background:#20392f;color:#fff8e9;min-height:640px}
+.natal-hero::before{content:"✦  ✧  ✦";position:absolute;top:28px;left:clamp(22px,7vw,130px);font-size:1rem;letter-spacing:1.6rem;color:#e4be85;opacity:.9}
+.natal-hero-copy{position:relative;z-index:1;padding-top:clamp(86px,9vw,145px);padding-bottom:clamp(75px,8vw,120px)}
+.natal-hero h1{max-width:670px;line-height:.94}
+.natal-hero h1 em{font-weight:400;color:#e5caa2}
+.natal-hero p{max-width:490px;color:#efe8d9}
+.natal-hero .eyebrow{color:#e5caa2}
+.natal-actions .natal-button{background:#e7cda8;border-color:#e7cda8;color:#21372b!important}
+.natal-actions .natal-button:hover,.natal-actions .natal-button:focus-visible{background:#fff3dc}
+.natal-visual{background:#e6dfcd}
+.natal-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(32,57,47,.1),transparent 28%)}
+.natal-visual span{z-index:1;color:#354035}
+.natal-details{background:#f0eadc;border-color:#d9cdb8}
+.natal-details p{padding-left:22px;border-left:2px solid #ae8a58}
+.natal-intro{background:radial-gradient(circle at 90% 15%,rgba(197,157,99,.13),transparent 32%),#f8f5ed}
+.natal-packs{background:#e9eee7}
+.natal-pack-grid article{background:#fffdf8;border-color:#d2d6cd}
+.natal-pack-grid article.natal-featured{border-color:#8f3939;box-shadow:0 14px 34px rgba(32,57,47,.1)}
+.natal-popular{background:#8f3939}
+.natal-booking{background:#f0eadc}
+.natal-form{background:#fffdf8}
+.natal-gift{background:#f8f5ed}
+.natal-gift-card{background:#20392f;box-shadow:20px 20px 0 #d9c4a5}
+.natal-before{display:grid;grid-template-columns:1.1fr 1fr;gap:8vw;align-items:center;background:#20392f;color:#fff8e9}
+.natal-before h2{color:#e5caa2}
+.natal-before>div:first-child p{max-width:650px;color:#f2ecdf}
+.natal-before-notes{display:grid;gap:16px}
+.natal-before-notes p{margin:0;padding:18px 0 18px 28px;border-bottom:1px solid rgba(246,238,219,.24);font-size:.92rem;color:#f2ecdf}
+.natal-before-notes span{display:inline-block;margin-left:-28px;width:28px;color:#e5caa2}
+.natal-before-notes strong{display:block;font-size:1rem;color:#fff;margin-bottom:2px}
+.natal-faq{background:#fbf8f1}
+.natal-faq-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(35px,6vw,100px)}
+.natal-faq-group h3{font:400 2rem 'Cormorant Garamond',Georgia,serif;margin:10px 0 12px;color:#8f3939}
+.natal-faq details{padding:18px 0;border-color:#d8d3c7}
+.natal-faq summary{font-weight:600;line-height:1.45;list-style:none;position:relative;padding-right:26px}
+.natal-faq summary::-webkit-details-marker{display:none}
+.natal-faq summary::after{content:"+";position:absolute;right:0;top:0;font-size:1.35rem;color:#8f3939;font-weight:400}
+.natal-faq details[open] summary::after{content:"−"}
+.natal-faq details p{font-size:.91rem;line-height:1.7;margin:12px 0 0;color:#51594e}
+.natal-faq details a{color:#7e3030;text-underline-offset:3px}
+@media(max-width:850px){.natal-before,.natal-faq-layout{grid-template-columns:1fr}.natal-hero::before{left:7vw}.natal-hero-copy{padding-top:90px}.natal-before{gap:24px}}

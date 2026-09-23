@@ -86,7 +86,7 @@ function bookSession(input) {
   const day = clean_(input.date, 10);
   const time = clean_(input.time, 5);
   const pack = clean_(input.pack, 50);
-  const allowedPacks = { 'Essencial': 60, 'Completa': 90, 'Memórias em Movimento': 145 };
+  const allowedPacks = { 'Essencial': 60, 'Completo': 90, 'Memórias em Movimento': 145 };
   if (!name || !email_(email) || !validDay_(day) || !Object.prototype.hasOwnProperty.call(allowedPacks, pack) || !/^\d{2}:00$/.test(time)) throw new Error('Confirma os dados da marcação.');
   const hour = Number(time.slice(0,2));
   if (!CONFIG.slotHours.includes(hour)) throw new Error('Esta hora não está disponível.');

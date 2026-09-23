@@ -7,7 +7,7 @@
 <section id="success" hidden><h3>Pré-reserva recebida 🎄</h3><p>Enviámos as instruções para o teu email. Confirma o sinal de 20 € por MB WAY para 919 592 819 nas próximas 24 horas. Entramos em contacto depois de verificarmos o pagamento.</p><p id="email-warning" hidden>Houve uma falha no envio do email. A vaga está pré-reservada; contacta-nos pelo WhatsApp com o número de referência abaixo.</p><p>Referência da pré-reserva: <strong id="booking-id"></strong></p></section></div><script>
 const state={dates:[],date:null,time:null,pack:null};
 const $=id=>document.getElementById(id);
-const packs=[['Essencial',60],['Completa',90],['Memórias em Movimento',145]];
+const packs=[['Essencial',60],['Completo',90],['Memórias em Movimento',145]];
 function status(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error)}
 function show(step){['dates','hours','details','success'].forEach(id=>$(id).hidden=id!==step);$('step-label').textContent=({dates:'1 / 3',hours:'2 / 3',details:'3 / 3',success:'Concluído'})[step]}
 function refresh(){status('A consultar a agenda…');google.script.run.withSuccessHandler(days=>{state.dates=days;drawDates();status('');show('dates')}).withFailureHandler(e=>status('Não foi possível consultar a agenda. Tenta novamente mais tarde.',true)).getAvailability()}
