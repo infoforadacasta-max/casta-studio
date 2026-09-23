@@ -4,7 +4,7 @@ A página do site já contém o espaço para esta agenda. Enquanto o endereço d
 
 ## Antes de publicar a agenda
 
-1. Na conta Google que tem acesso de edição à agenda `info.foradacasta@gmail.com`, abre [script.google.com](https://script.google.com/) e cria um projeto.
+1. Na conta Google `info@castastudio.pt`, abre o projeto **CASTA · Reservas Natal 2026** já criado no Apps Script.
 2. Nas definições do projeto, escolhe o fuso `Europe/Lisbon`.
 3. Substitui `Code.gs` pelo conteúdo deste `Code.gs`; cria um ficheiro HTML com o nome exato `Booking` e cola `Booking.html`.
 4. Confirma em `CONFIG` o ID da agenda e os horários. A proposta atual é 10h, 11h, 12h, pausa 13h–15h, 15h, 16h, 17h e 18h. Cada hora ocupa um bloco inteiro: até 45 minutos de sessão e 15 minutos livres. São sete vagas por dia, se não houver compromissos.
@@ -17,7 +17,7 @@ A página do site já contém o espaço para esta agenda. Enquanto o endereço d
 - Ao clicar em pré-reservar, o serviço volta a consultar a agenda dentro de um bloqueio para impedir duas reservas simultâneas da mesma hora.
 - A pré-reserva cria um evento de uma hora e envia instruções para o sinal de 20 € por MB WAY. O pagamento é verificado manualmente pela CASTA.
 - O evento pendente liberta a vaga após 24 horas sem confirmação. A limpeza ocorre quando alguém consulta ou tenta marcar a agenda. Para limpeza pontual sem visitas, cria um acionador horário para `cleanupExpiredReservations`.
-- Depois de verificar o pagamento, no editor de Apps Script executa `confirmReservation('ID indicado no email ao estúdio')`. Isso preserva a vaga e envia confirmação ao cliente. Nunca confirmes o evento apenas alterando o título à mão.
+- Depois de verificar o pagamento, nas **Definições do projeto → Propriedades do script**, adiciona `CASTA_CONFIRM_ID` com o ID indicado no email ao estúdio. No editor, executa `confirmFromEditor`. Isso preserva a vaga, envia confirmação ao cliente e apaga essa propriedade. Nunca confirmes o evento apenas alterando o título à mão.
 - O endereço do serviço não contém credenciais. A aplicação corre na conta Google da CASTA; o site e os visitantes não recebem acesso direto à agenda. Ainda assim, um endpoint público pode receber spam. Antes de lançar publicidade, monitoriza os pedidos e as quotas de email do Apps Script.
 
 O projeto está pronto para a autorização da conta e um teste real. Sem essa autorização, nenhuma página está autorizada a afirmar que uma hora está livre.
