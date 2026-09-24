@@ -34,6 +34,7 @@ function listSeasonEvents_() {
       singleEvents: true,
       showDeleted: false,
       maxResults: 2500,
+      fields: 'nextPageToken,items(summary,description,start,end,transparency,status)',
       pageToken
     });
     result.push(...(page.items || []));
@@ -81,6 +82,9 @@ function availableHours_(day, events) {
   });
 }
 function getAvailability() {
+  const cache = CacheService.getScriptCache();
+  const cached = cache.get('natal-availability-v1');
+  if (cached) return JSON.parse(cached);
   const events = activeEvents_();
   const result = [];
   for (let day = localDate_(CONFIG.seasonStart, 12); day <= localDate_(CONFIG.seasonEnd, 12); day.setDate(day.getDate() + 1)) {
@@ -90,6 +94,8 @@ function getAvailability() {
       result.push({ date, remaining: hours.length, hours: hours.map(hour => `${String(hour).padStart(2,'0')}:00`) });
     }
   }
+  // Booking validates the selected slot again under a lock.
+  cache.put('natal-availability-v1', JSON.stringify(result), 30);
   return result;
 }
 function clean_(value, max) { return String(value || '').trim().slice(0, max); }
@@ -126,6 +132,7 @@ function bookSession(input) {
       end: { dateTime: new Date(start.getTime() + 3600000).toISOString(), timeZone: CONFIG.timeZone },
       visibility: 'private'
     }, CONFIG.calendarId);
+    CacheService.getScriptCache().remove('natal-availability-v1');
   } finally { lock.releaseLock(); }
   const when = `${day} às ${time}`;
   try {
